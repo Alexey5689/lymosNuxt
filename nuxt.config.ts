@@ -1,6 +1,7 @@
 import { resolve } from "path";
 export default defineNuxtConfig({
-  devtools: { enabled: true },
-  alias:{ '@': resolve(__dirname, "/") },
-  css: ['~/assets/style.css'],
-})
+  devtools: { enabled: true, vscode: {} },
+  alias: { "@": resolve(__dirname, "/") },
+  css: ["~/assets/style.css"],
+  modules: ["@nuxtjs/strapi"],
+});
