@@ -11,12 +11,7 @@ const { data, error } = await useFetch("https://strapi.lymos.ru/api/forms/1", {
     "Content-Type": "application/x-www-form-urlencoded",
   },
 });
-const dataTwice = await $fetch("https://strapi.lymos.ru/api/forms/1", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
+
 const response = data.value.data;
 const titleServise = response.attributes.titleService;
 
