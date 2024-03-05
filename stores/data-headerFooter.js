@@ -14,7 +14,9 @@ export const DataHeaderFooter = defineStore("data-headerFooter", {
     portfolio: "",
     servicesRout: "",
     portfolioRout: "",
+    // headerMenues: [],
   }),
+
   actions: {
     async getHeaderFooter() {
       const response = await $fetch("https://strapi.lymos.ru/api/headers/1", {
@@ -51,6 +53,7 @@ export const DataHeaderFooter = defineStore("data-headerFooter", {
         }
       );
       this.navigations = respNavigation.data;
+      // this.headerMenu.push(respNavigation.data[2], respNavigation.data[0]);
       let tmpServ = respNavigation.data[2];
       let tmpPortf = respNavigation.data[0];
       this.services = tmpServ.attributes.routerLink;

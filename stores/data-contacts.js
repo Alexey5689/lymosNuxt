@@ -6,12 +6,19 @@ export const DataContact = defineStore("data-contact", {
     messengers: [],
     phoneNumbers: [],
     emails: [],
+    title_contacts_h1: "",
+    title_contacts_h3: "",
+    iframe: "",
+    social_network_h4: "",
+    messengers_h4: "",
+    phone_number_h4: "",
+    email_h4: "",
   }),
   actions: {
     async getContacts() {
       try {
         const responseContacts = await $fetch(
-          "https://strapi.lymos.ru/api/contacts-contents",
+          "https://strapi.lymos.ru/api/contacts/1",
           {
             method: "GET",
             headers: {
@@ -19,8 +26,14 @@ export const DataContact = defineStore("data-contact", {
             },
           }
         );
-
-        this.contentContacts = responseContacts.data;
+        let tmp = responseContacts.data;
+        this.title_contacts_h1 = tmp.attributes.h1;
+        this.title_contacts_h3 = tmp.attributes.h3;
+        this.iframe = tmp.attributes.iframe;
+        this.social_network_h4 = tmp.attributes.social_h4;
+        this.messengers_h4 = tmp.attributes.messengers_h4;
+        this.phone_number_h4 = tmp.attributes.phone_h4;
+        this.email_h4 = tmp.attributes.email_h4;
         const responSocialNetworks = await $fetch(
           "https://strapi.lymos.ru/api/social-networks",
           {
