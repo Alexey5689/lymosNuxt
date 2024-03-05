@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     },
   },
   css: ["~/assets/style.css"],
-  modules: ["@pinia/nuxt"],
+  modules: ["@pinia/nuxt", "nuxt-swiper"],
   pinia: {
     storesDirs: ["./stores/**"],
   },
