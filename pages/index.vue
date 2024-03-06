@@ -114,7 +114,7 @@ useHead({
     </section>
   </main>
 
-  <!-- <TheFooter /> -->
+  <TheFooter />
 </template>
 
 <style scoped>
