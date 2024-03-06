@@ -38,35 +38,41 @@ export default {
   },
   mounted() {
     this.checkScreenWidth();
-    window.addEventListener("resize", this.checkScreenWidth);
+    if (process.client) {
+      window.addEventListener("resize", this.checkScreenWidth);
+    }
   },
   beforeDestroy() {
-    window.removeEventListener("resize", this.checkScreenWidth);
+    if (process.client) {
+      window.removeEventListener("resize", this.checkScreenWidth);
+    }
   },
   methods: {
     checkScreenWidth() {
-      this.isMobile = window.innerWidth <= 530;
+      if (process.client) {
+        this.isMobile = window.innerWidth <= 530;
+      }
     },
   },
 };
 </script>
 <template>
   <main>
-    <!-- <TheSpots /> -->
+    <TheSpots />
     <div class="wrapper">
       <div class="content portfolio">
         <h1 class="title_portfolio">{{ dataPortfolio.getPageTitle }}</h1>
         <div class="nav_category">
           <ul>
-            <!-- <SwiperNav v-if="isMobile" />
-            <PorUl v-else /> -->
+            <TheSwiperCategory v-if="isMobile" />
+            <ThePorUl v-else />
           </ul>
         </div>
         <div class="portfolio_box">
-          <!-- <PorPortfollo /> -->
+          <ThePorPortfolio />
         </div>
       </div>
     </div>
   </main>
-  <!-- <TheFooter /> -->
+  <TheFooter />
 </template>

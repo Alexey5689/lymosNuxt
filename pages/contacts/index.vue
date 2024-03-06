@@ -31,7 +31,7 @@ useHead({
 </script>
 <template>
   <main>
-    <!-- <TheSpots /> -->
+    <TheSpots />
     <div class="wrapper">
       <div class="content contacts">
         <h1 class="title_contacts">{{ dataContact.title_contacts_h1 }}</h1>
