@@ -52,9 +52,9 @@ useHead({
           </li>
         </ul>
 
-        <!-- <TheAboutProject /> -->
+        <TheAboutProject />
 
-        <!-- <TheConceptVue /> -->
+        <TheConcept />
 
         <section class="we_used">
           <h2>{{ dataPremiumPipe.getWeUse }}</h2>
@@ -86,5 +86,5 @@ useHead({
       />
     </section>
   </main>
-  <!-- <TheFooter /> -->
+  <TheFooter />
 </template>

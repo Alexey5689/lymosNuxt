@@ -34,29 +34,32 @@ export const DataPremiumPipe = defineStore("data-premium-pipe", {
   actions: {
     async getPermPipeAbout() {
       try {
-        const response = await $fetch({
-          url: "https://strapi.lymos.ru/api/premium-pipe-abouts",
-          method: "GET",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        });
-        this.aboutProjects = response.data.data;
+        const response = await $fetch(
+          "https://strapi.lymos.ru/api/premium-pipe-abouts",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
+        this.aboutProjects = response.data;
       } catch (err) {
         console.log(err);
       }
     },
     async getPermPipeConcepts() {
       try {
-        const response = await $fetch({
-          url: "https://strapi.lymos.ru/api/premium-pipe-concepts",
-          method: "GET",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        });
-        this.concepts = response.data.data;
-        console.log(response);
+        const response = await $fetch(
+          "https://strapi.lymos.ru/api/premium-pipe-concepts",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
+        this.concepts = response.data;
       } catch (err) {}
     },
     async getPermiumPipe() {
