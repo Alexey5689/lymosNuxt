@@ -56,8 +56,7 @@ export default {
           <nav>
             <ul>
               <li>
-                <!-- @click="form.changActivForm" -->
-                <a class="btn-order"
+                <a class="btn-order" @click="form.changActivForm"
                   >{{ dataHeader.a_orderProject }}
                   <svg
                     width="70"
@@ -77,6 +76,7 @@ export default {
               </li>
             </ul>
           </nav>
+
           <div class="right-contacts">
             <a :href="dataHeader.a_href_tel">{{ dataHeader.a_tel }}</a>
             <span class="dropdown__divider"></span>
@@ -84,12 +84,12 @@ export default {
           </div>
         </div>
       </div>
+
       <div class="left-mobile">
         <nav>
           <ul>
             <li>
-              <!-- @click="form.changActivForm" -->
-              <a class="btn-order"
+              <a class="btn-order" @click="form.changActivForm"
                 >{{ dataHeader.a_orderProject }}
                 <svg
                   width="70"
@@ -144,10 +144,12 @@ export default {
           >
         </div>
       </div>
+
       <p class="left-mobile-rights lmr-600">
         {{ dataHeader.copyrightP }}
       </p>
     </div>
+
     <!--  -->
     <div class="wrapper">
       <ul class="header__left-side">
@@ -157,15 +159,16 @@ export default {
             <span></span>
           </button>
         </li>
-        <li class="header__left-item">
-          <NuxtLink :to="`/${dataHeader.servicesRout}`">{{
-            dataHeader.services
-          }}</NuxtLink>
-        </li>
-        <li class="header__left-item">
-          <NuxtLink :to="`/${dataHeader.portfolioRout}`">{{
-            dataHeader.portfolio
-          }}</NuxtLink>
+        <li
+          v-for="navigation in dataHeader.headerMenues"
+          :key="navigation.id"
+          class="header__left-item"
+        >
+          <NuxtLink
+            :to="`/${navigation.attributes.routerLink_to}`"
+            @click="closeDropdown"
+            >{{ navigation.attributes.routerLink }}</NuxtLink
+          >
         </li>
       </ul>
       <div class="header__logo">
@@ -178,13 +181,41 @@ export default {
           <a :href="dataHeader.a_href_tel">{{ dataHeader.a_tel }}</a>
         </li>
         <li>
-          <!-- @click="form.changActivForm" -->
-          <a class="btn-order"
+          <a class="btn-order" @click="form.changActivForm"
             >{{ dataHeader.a_orderProject }}
             <TheIconOrderProject />
           </a>
         </li>
       </ul>
     </div>
+
+    <!-- <TheForm v-if="form.getFormState" />
+    <TheFormThanks v-if="form.getThanksFormState" /> -->
   </header>
 </template>
+
+<style scoped>
+.header__menu button {
+  cursor: pointer;
+}
+
+.header__left-item a,
+.header__logo a,
+.header .left-part nav ul li a,
+.mobile_li a {
+  text-decoration: none;
+  color: #1e1e1e;
+}
+
+@media (max-width: 600px) {
+  .mobile_li a {
+    font-size: 28px;
+  }
+}
+
+.header__logo a img {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+</style>

@@ -14,7 +14,7 @@ export const DataHeaderFooter = defineStore("data-headerFooter", {
     portfolio: "",
     servicesRout: "",
     portfolioRout: "",
-    // headerMenues: [],
+    headerMenues: [],
   }),
 
   actions: {
@@ -53,13 +53,7 @@ export const DataHeaderFooter = defineStore("data-headerFooter", {
         }
       );
       this.navigations = respNavigation.data;
-      // this.headerMenu.push(respNavigation.data[2], respNavigation.data[0]);
-      let tmpServ = respNavigation.data[2];
-      let tmpPortf = respNavigation.data[0];
-      this.services = tmpServ.attributes.routerLink;
-      this.servicesRout = tmpServ.attributes.routerLink_to;
-      this.portfolio = tmpPortf.attributes.routerLink;
-      this.portfolioRout = tmpPortf.attributes.routerLink_to;
+      this.headerMenues.push(respNavigation.data[2], respNavigation.data[0]);
     },
   },
 });
