@@ -31,16 +31,16 @@ useHead({
 </script>
 <template>
   <main class="mvp">
-    <!-- <PageTitle :pageTitles="dataMvp.pageTitle" />
-    <TheSpotsFore :pageSlogans="dataMvp.spotsFores" /> -->
+    <ThePageTitle :pageTitles="dataMvp.pageTitle" />
+    <TheSpotsFore :pageSlogans="dataMvp.spotsFores" />
     <div v-for="mvpView in dataMvp.mvpViews" :key="mvpView.id" class="wrapper">
       <div class="content product_dev">
         <h4 class="product_h4">{{ mvpView.attributes.h4 }}</h4>
-        <!-- <PageSteps
+        <ThePageSteps
           :arcHeaders="dataMvp.arcHeaders"
           :stepsDev="dataMvp.stepsDev"
           :arcFooters="dataMvp.arcFooters"
-        /> -->
+        />
         <p class="p_description">{{ mvpView.attributes.pDescription }}</p>
       </div>
 
@@ -52,5 +52,5 @@ useHead({
       </div>
     </div>
   </main>
-  <!-- <TheFooter /> -->
+  <TheFooter />
 </template>

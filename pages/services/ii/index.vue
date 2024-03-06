@@ -31,16 +31,16 @@ useHead({
 </script>
 <template>
   <main class="ii">
-    <!-- <PageTitle :pageTitles="dataIi.pageTitle" /> -->
-    <!--<TheSpotsFore :pageSlogans="dataIi.spotsFores" /> -->
+    <ThePageTitle :pageTitles="dataIi.pageTitle" />
+    <TheSpotsFore :pageSlogans="dataIi.spotsFores" />
     <div v-for="iiView in dataIi.iiViews" :key="iiView.id" class="wrapper">
       <div class="content product_dev">
         <h4 class="product_h4">{{ iiView.attributes.h4 }}</h4>
-        <!-- <PageSteps
+        <ThePageSteps
           :arcHeaders="dataIi.arcHeaders"
           :stepsDev="dataIi.stepsDev"
           :arcFooters="dataIi.arcFooters"
-        /> -->
+        />
       </div>
 
       <div class="content">
@@ -54,5 +54,5 @@ useHead({
     </div>
   </main>
 
-  <!-- <TheFooter /> -->
+  <TheFooter />
 </template>

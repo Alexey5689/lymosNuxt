@@ -31,9 +31,9 @@ useHead({
 </script>
 <template>
   <main class="development">
-    <!-- <PageTitle :pageTitles="dataDev.pageTitle" /> -->
+    <ThePageTitle :pageTitles="dataDev.pageTitle" />
 
-    <!-- <TheSpotsFore :pageSlogans="dataDev.spotsFores" /> -->
+    <TheSpotsFore :pageSlogans="dataDev.spotsFores" />
 
     <div class="wrapper">
       <div
@@ -42,11 +42,11 @@ useHead({
         class="content product_dev"
       >
         <h4 class="product_h4">{{ devView.attributes.h4 }}</h4>
-        <!-- <PageSteps
+        <ThePageSteps
           :arcHeaders="dataDev.arcHeaders"
           :stepsDev="dataDev.stepsDev"
           :arcFooters="dataDev.arcFooters"
-        /> -->
+        />
 
         <div class="experience">
           <!-- <h5>Иновационные решения</h5>
@@ -56,19 +56,19 @@ useHead({
             прибыли компании
           </p>-->
           <h3>{{ devView.attributes.h3 }}</h3>
-          <!-- <TheExpertise /> -->
+          <TheExpertise />
         </div>
 
         <section class="word_case">
           <h2>{{ devView.attributes.wordCaseh2 }}</h2>
           <h3>{{ devView.attributes.wordCaseh3 }}</h3>
           <div class="cases">
-            <!-- <DevCase /> -->
+            <TheDevCase />
           </div>
         </section>
       </div>
     </div>
   </main>
 
-  <!-- <TheFooter /> -->
+  <TheFooter />
 </template>

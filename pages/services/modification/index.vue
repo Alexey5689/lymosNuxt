@@ -31,16 +31,16 @@ useHead({
 </script>
 <template>
   <main class="modification">
-    <!-- <PageTitle :pageTitles="dataMod.pageTitle" />
-    <TheSpotsFore :pageSlogans="dataMod.spotsFores" /> -->
+    <ThePageTitle :pageTitles="dataMod.pageTitle" />
+    <TheSpotsFore :pageSlogans="dataMod.spotsFores" />
     <div v-for="modView in dataMod.modViews" :key="modView.id" class="wrapper">
       <div class="content product_dev">
         <h4 class="product_h4">{{ modView.attributes.h4 }}</h4>
-        <!-- <PageSteps
+        <ThePageSteps
           :arcHeaders="dataMod.arcHeaders"
           :stepsDev="dataMod.stepsDev"
           :arcFooters="dataMod.arcFooters"
-        /> -->
+        />
       </div>
 
       <div class="content">
@@ -53,5 +53,5 @@ useHead({
       </div>
     </div>
   </main>
-  <!-- <TheFooter /> -->
+  <TheFooter />
 </template>
