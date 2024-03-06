@@ -47,10 +47,10 @@ useHead({
             <p class="services__text">{{ dataHome.servicesP }}</p>
           </div>
           <div class="services__slider-container swiper-container">
-            <!-- <TheSwiper /> -->
+            <TheSwiper />
           </div>
           <div class="services__mobile">
-            <!-- <TheServMob /> -->
+            <TheServicesMobile />
           </div>
         </div>
       </div>
