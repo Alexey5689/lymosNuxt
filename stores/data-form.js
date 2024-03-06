@@ -8,6 +8,7 @@ export const DataForm = defineStore("data-form", {
     buttonNext: "",
     buttonBack: "",
     buttonSend: "",
+    formServs: [],
   }),
   actions: {
     async getFormData() {
@@ -25,9 +26,20 @@ export const DataForm = defineStore("data-form", {
         this.buttonBack = tmp.attributes.buttonMoveBack;
         this.buttonNext = tmp.attributes.buttonNextStep;
         this.buttonSend = tmp.attributes.buttonSend;
+        const respFormServ = await $fetch(
+          "https://strapi.lymos.ru/api/form-services",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+            },
+          }
+        );
+        this.formServs = respFormServ.data;
       } catch (err) {
         console.log(err);
       }
     },
   },
 });
+// /api/form-services

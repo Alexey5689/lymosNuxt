@@ -1,6 +1,9 @@
 <script setup>
 import { DataHeaderFooter } from "~/stores/data-headerFooter.js";
+import { FormControl } from "~/stores/form-control.js";
+
 const dataHeader = DataHeaderFooter();
+const form = FormControl();
 onMounted(() => {
   dataHeader.getHeaderFooter();
 });
@@ -14,19 +17,23 @@ export default {
   },
   methods: {
     toggleDropdown() {
-      this.isDropdownOpened = !this.isDropdownOpened;
-      document.body.classList.add("stop");
+      if (process.client) {
+        this.isDropdownOpened = !this.isDropdownOpened;
+        document.body.classList.add("stop");
 
-      const doc = document.documentElement;
-      doc.style.setProperty("--app-height", `${window.innerHeight}px`);
-
-      window.addEventListener("resize", () => {
+        const doc = document.documentElement;
         doc.style.setProperty("--app-height", `${window.innerHeight}px`);
-      });
+
+        window.addEventListener("resize", () => {
+          doc.style.setProperty("--app-height", `${window.innerHeight}px`);
+        });
+      }
     },
     closeDropdown() {
       this.isDropdownOpened = false;
-      document.body.classList.remove("stop");
+      if (process.client) {
+        document.body.classList.remove("stop");
+      }
     },
   },
 };
@@ -189,8 +196,8 @@ export default {
       </ul>
     </div>
 
-    <!-- <TheForm v-if="form.getFormState" />
-    <TheFormThanks v-if="form.getThanksFormState" /> -->
+    <TheForm v-if="form.getFormState" />
+    <TheFormThanks v-if="form.getThanksFormState" />
   </header>
 </template>
 
