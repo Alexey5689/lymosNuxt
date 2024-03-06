@@ -31,16 +31,16 @@ useHead({
 </script>
 <template>
   <main>
-    <!-- <TheSpots /> -->
+    <TheSpots />
     <div class="wrapper">
       <div class="content amenities">
         <h1 class="title_amenities">{{ dataServices.getH1 }}</h1>
         <h4 class="description_amenities">
           {{ dataServices.getH4 }}
         </h4>
-        <!-- <SerApplications /> -->
+        <TheSerApplications />
       </div>
     </div>
   </main>
-  <!-- <TheFooter /> -->
+  <TheFooter />
 </template>
