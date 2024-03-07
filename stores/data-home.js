@@ -18,6 +18,7 @@ export const DataHome = defineStore("data-home", {
     aboutBlockSpan2: "",
     aboutBlockP3: "",
     aboutBlockSpan3: "",
+    tmp: [],
   }),
   getters: {},
   actions: {

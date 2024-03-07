@@ -9,12 +9,19 @@ onMounted(() => {
   titleDesc.getHomeTitDecs();
   dataHome.getHomePage();
 });
+
+const { data } = await useAsyncData("uniqueKeyForTitleDescription", () =>
+  fetch("https://strapi.lymos.ru/api/title-descriptions/1")
+    .then((response) => response.json())
+    .then((result) => result.data.attributes)
+);
+
 useHead({
-  title: () => titleDesc.titleDesc.title,
+  title: () => data.value.title,
   meta: [
     {
       name: "description",
-      content: () => titleDesc.titleDesc.description,
+      content: () => data.value.description,
     },
   ],
 });
