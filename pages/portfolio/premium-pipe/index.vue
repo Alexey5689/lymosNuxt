@@ -1,39 +1,99 @@
 <script setup>
-import { DataPremiumPipe } from "~/stores/data-premium-pipe.js";
-import { DataTitleDesc } from "~/stores/data-titleDesc.js";
+const titleResponse = await $fetch(
+  "https://strapi.lymos.ru/api/title-descriptions/2",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const title = titleResponse.data.attributes.title;
+const description = titleResponse.data.attributes.description;
 
-const titleDesc = DataTitleDesc();
-const dataPremiumPipe = DataPremiumPipe();
-
-onMounted(() => {
-  dataPremiumPipe.getPermiumPipe();
-  titleDesc.getPremPipeTitDecs();
-});
-
-// useHead({
-//   title: () => titleDesc.premPipeTitleDesc.title,
-//   meta: [
-//     {
-//       name: "description",
-//       content: () => titleDesc.premPipeTitleDesc.description,
-//     },
-//   ],
-// });
 useHead({
-  title: () => titleDesc.titleDesc.title,
+  title: () => title,
   meta: [
     {
       name: "description",
-      content: () => titleDesc.titleDesc.description,
+      content: () => description,
     },
   ],
 });
+const respSwapIcons = await $fetch("https://strapi.lymos.ru/api/swap-icons", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+const swapIcons = respSwapIcons.data;
+
+const respTechnologyLogos = await $fetch(
+  "https://strapi.lymos.ru/api/technologies",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const technologyLogos = respTechnologyLogos.data;
+
+const responseContentPremiumPipeUl = await $fetch(
+  "https://strapi.lymos.ru/api/content-premium-pipe-uls",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const contentPremiumPipeUls = responseContentPremiumPipeUl.data;
+
+const responseDesignSystems = await $fetch(
+  "https://strapi.lymos.ru/api/design-systems",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const designSystems = responseDesignSystems.data;
+
+const respContentPremiumPipe = await $fetch(
+  "https://strapi.lymos.ru/api/content-premium-pipes/1",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+let tmpPpcontent = respContentPremiumPipe.data;
+const premiumPipeH1 = tmpPpcontent.attributes.h1;
+
+const responseWeUse = await $fetch("https://strapi.lymos.ru/api/we-uses/1", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+let tmpWeUse = responseWeUse.data;
+const weUseH2 = tmpWeUse.attributes.h2;
+
+// const swapIcons = [];
+// const technologyLogos = [];
+// const weUseH2 = "";
+// const designSystems = [];
+// const contentPremiumPipeUls = [];
+// const premiumPipeH1 = "";
 </script>
 <template>
   <main>
     <div class="swap_icons">
       <img
-        v-for="swapIcon in dataPremiumPipe.getSwapIcons"
+        v-for="swapIcon in swapIcons"
         :key="swapIcon.id"
         :src="swapIcon.attributes.swapIcon"
         :alt="swapIcon.attributes.swapAlt"
@@ -42,10 +102,10 @@ useHead({
 
     <div class="wrapper">
       <div class="content premium_pipe">
-        <h1>{{ dataPremiumPipe.getContentPremiumPipe }}</h1>
+        <h1>{{ premiumPipeH1 }}</h1>
         <ul>
           <li
-            v-for="contentPremiumPipeUl in dataPremiumPipe.getContentPremiumPipeUl"
+            v-for="contentPremiumPipeUl in contentPremiumPipeUls"
             :key="contentPremiumPipeUl.id"
           >
             {{ contentPremiumPipeUl.attributes.li }}
@@ -57,10 +117,10 @@ useHead({
         <TheConcept />
 
         <section class="we_used">
-          <h2>{{ dataPremiumPipe.getWeUse }}</h2>
+          <h2>{{ weUseH2 }}</h2>
           <div class="technology_logos">
             <img
-              v-for="technologyLogo in dataPremiumPipe.getTechLogo"
+              v-for="technologyLogo in technologyLogos"
               :key="technologyLogo.id"
               :src="technologyLogo.attributes.techLogo"
               :alt="technologyLogo.attributes.techAlt"
@@ -71,7 +131,7 @@ useHead({
     </div>
 
     <section
-      v-for="designSystem in dataPremiumPipe.getDesineSystem"
+      v-for="designSystem in designSystems"
       :key="designSystem.id"
       class="design_system"
     >

@@ -1,17 +1,8 @@
 <script setup>
 import { DataPortfolio } from "~/stores/data-portfolio.js";
-
 const dataPortfolio = DataPortfolio();
 </script>
-<style>
-/* .portfolio_example_footer > p {
-  color: #595959;
-  font-size: 0.8333333vw;
-  font-weight: 400;
-  line-height: 120%;
-  margin-top: 20px;
-} */
-</style>
+
 <template>
   <NuxtLink
     :to="`/portfolio/${portfolioExample.attributes.url}`"
