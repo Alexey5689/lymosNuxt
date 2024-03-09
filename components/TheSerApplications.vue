@@ -1,13 +1,21 @@
 <script setup>
-import { DataServices } from "~/stores/data-services.js";
+const response = await $fetch(
+  "https://strapi.lymos.ru/api/services?populate=*",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 
-const dataServices = DataServices();
+const applicationServs = response.data;
 </script>
 
 <template>
   <section
     class="applications"
-    v-for="applicationServ in dataServices.getApplicationServs"
+    v-for="applicationServ in applicationServs"
     :key="applicationServ.id"
   >
     <div class="left_applications">

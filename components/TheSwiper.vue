@@ -108,13 +108,6 @@ const response = await $fetch("https://strapi.lymos.ru/api/swipers?sort=id", {
 });
 
 const swiperData = response.data;
-
-// import { DataSwiper } from "~/stores/data-swiper.js";
-// const swipe = DataSwiper();
-
-// onMounted(() => {
-//   swipe.getSwiper();
-// });
 </script>
 <style scoped>
 .swiper {
