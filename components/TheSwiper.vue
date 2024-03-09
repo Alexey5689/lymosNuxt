@@ -16,7 +16,7 @@
       :space-between="16"
       :modules="modules"
     >
-      <swiper-slide v-for="SwData in swipe.swiperData" :key="SwData.id">
+      <swiper-slide v-for="SwData in swiperData" :key="SwData.id">
         <NuxtLink
           :to="`/services/${SwData.attributes.url}`"
           class="services__slide swiper-slide"
@@ -100,14 +100,21 @@ const modules = [Navigation, Pagination];
 //кнопки navigation
 const prev = ref(null);
 const next = ref(null);
-
-import { DataSwiper } from "~/stores/data-swiper.js";
-const swipe = DataSwiper();
-
-import { onMounted } from "vue";
-onMounted(() => {
-  swipe.getSwiper();
+const response = await $fetch("https://strapi.lymos.ru/api/swipers?sort=id", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
 });
+
+const swiperData = response.data;
+
+// import { DataSwiper } from "~/stores/data-swiper.js";
+// const swipe = DataSwiper();
+
+// onMounted(() => {
+//   swipe.getSwiper();
+// });
 </script>
 <style scoped>
 .swiper {

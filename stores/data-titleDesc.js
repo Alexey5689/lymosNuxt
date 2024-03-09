@@ -38,32 +38,39 @@ export const DataTitleDesc = defineStore("data-titleDesc", {
     //   title: "",
     //   description: "",
     // },
-    titleDesc: {
-      title: "",
-      description: "",
-    },
+
+    title: "",
+    description: "",
   }),
   actions: {
     async getHomeTitDecs() {
-      try {
-        const response = await $fetch(
-          "https://strapi.lymos.ru/api/title-descriptions/1",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        // let tmpHome = response.data.data;
-        // this.homeTitleDesc.title = tmpHome.attributes.title;
-        // this.homeTitleDesc.description = tmpHome.attributes.description;
-        let tmp = response.data;
-        this.titleDesc.title = tmp.attributes.title;
-        this.titleDesc.description = tmp.attributes.description;
-      } catch (err) {
-        console.log(err);
-      }
+      const { data } = await useAsyncData("uniqueKeyForTitleDescription", () =>
+        fetch("https://strapi.lymos.ru/api/title-descriptions/1")
+          .then((response) => response.json())
+          .then((result) => result.data.attributes)
+      );
+      console.log(data);
+      // this.title = data._rawValue.title;
+      // this.description = data._rawValue.description;
+      //   try {
+      //     const response = await $fetch(
+      //       "https://strapi.lymos.ru/api/title-descriptions/1",
+      //       {
+      //         method: "GET",
+      //         headers: {
+      //           "Content-Type": "application/x-www-form-urlencoded",
+      //         },
+      //       }
+      //     );
+      //     // let tmpHome = response.data.data;
+      //     // this.homeTitleDesc.title = tmpHome.attributes.title;
+      //     // this.homeTitleDesc.description = tmpHome.attributes.description;
+      //     let tmp = response.data;
+      //     this.titleDesc.title = tmp.attributes.title;
+      //     this.titleDesc.description = tmp.attributes.description;
+      //   } catch (err) {
+      //     console.log(err);
+      //   }
     },
     async getPremPipeTitDecs() {
       try {

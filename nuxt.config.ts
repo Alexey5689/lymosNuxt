@@ -1,5 +1,7 @@
+import { resolve } from "path";
 export default defineNuxtConfig({
   devtools: { enabled: true, vscode: {} },
+  alias: { "@": resolve(__dirname, "/") },
   // app: {
   //   head: {
   //     meta: [
