@@ -4,19 +4,8 @@ export const DataCase = defineStore("data-case", {
     devCases: [],
   }),
   actions: {
-    async getDevCase() {
-      try {
-        const response = await $fetch("https://strapi.lymos.ru/api/dev-cases", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        });
-
-        this.devCases = response.data;
-      } catch (err) {
-        console.log(err);
-      }
+    getDevCase(response) {
+      this.devCases = response.data;
     },
   },
 });

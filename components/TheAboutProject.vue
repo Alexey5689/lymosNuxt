@@ -1,9 +1,17 @@
 <script setup>
 import { DataPremiumPipe } from "~/stores/data-premium-pipe.js";
 const dataAboutProject = DataPremiumPipe();
-onMounted(() => {
-  dataAboutProject.getPermPipeAbout();
-});
+
+const response = await $fetch(
+  "https://strapi.lymos.ru/api/premium-pipe-abouts",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+dataAboutProject.getPermPipeAbout(response);
 </script>
 
 <template>

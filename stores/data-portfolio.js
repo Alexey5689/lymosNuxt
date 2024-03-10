@@ -19,6 +19,7 @@ export const DataPortfolio = defineStore("data-portfolio", {
       },
     ],
     portfolioExample: [],
+    portfolioTitleH1: "",
   }),
   getters: {
     getCategory() {
@@ -116,21 +117,11 @@ export const DataPortfolio = defineStore("data-portfolio", {
       this.category = [];
     },
 
-    async getPortfolio() {
-      try {
-        const response = await $fetch(
-          "https://strapi.lymos.ru/api/portfolios",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.portfolioExample = response.data;
-      } catch (err) {
-        console.log(err);
-      }
+    getPortfolio(response) {
+      this.portfolioExample = response.data;
+    },
+    getPortfolioH1(respPortfolioPage) {
+      this.portfolioTitleH1 = respPortfolioPage.data.attributes.h1;
     },
   },
 });

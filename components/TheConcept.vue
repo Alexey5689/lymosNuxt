@@ -1,9 +1,17 @@
 <script setup>
 import { DataPremiumPipe } from "~/stores/data-premium-pipe.js";
 const dataConcept = DataPremiumPipe();
-onMounted(() => {
-  dataConcept.getPermPipeConcepts();
-});
+
+const response = await $fetch(
+  "https://strapi.lymos.ru/api/premium-pipe-concepts",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+dataConcept.getPermPipeConcepts(response);
 </script>
 
 <template>

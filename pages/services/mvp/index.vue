@@ -1,24 +1,21 @@
 <script setup>
-import { DataMvp } from "~/stores/data-mvp";
 import { DataTitleDesc } from "~/stores/data-titleDesc.js";
+import { DataMvp } from "~/stores/data-mvp";
 
-const titleDesc = DataTitleDesc();
 const dataMvp = DataMvp();
+const titleDesc = DataTitleDesc();
 
-onMounted(() => {
-  dataMvp.getMvpData();
-  titleDesc.getMvpTitDesc();
-});
+const titleResponse = await $fetch(
+  "https://strapi.lymos.ru/api/title-descriptions/4",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+titleDesc.getTitleDesc(titleResponse);
 
-// useHead({
-//   title: () => titleDesc.mvpTitleDesc.title,
-//   meta: [
-//     {
-//       name: "description",
-//       content: () => titleDesc.mvpTitleDesc.description,
-//     },
-//   ],
-// });
 useHead({
   title: () => titleDesc.titleDesc.title,
   meta: [
@@ -28,6 +25,69 @@ useHead({
     },
   ],
 });
+
+const respArcHeaders = await $fetch(
+  "https://strapi.lymos.ru/api/mvp-arc-headers",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respStepsDev = await $fetch(
+  "https://strapi.lymos.ru/api/mvp-steps-devs",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+
+const respArcFooters = await $fetch(
+  "https://strapi.lymos.ru/api/mvp-arc-footers",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+
+const respPageTitle = await $fetch(
+  "https://strapi.lymos.ru/api/mvp-page-titles",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+
+const respSpotsFores = await $fetch(
+  "https://strapi.lymos.ru/api/mvp-spots-fores",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respMvpViews = await $fetch("https://strapi.lymos.ru/api/mvp-views", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+dataMvp.getMvpData(
+  respArcHeaders,
+  respStepsDev,
+  respArcFooters,
+  respPageTitle,
+  respSpotsFores,
+  respMvpViews
+);
 </script>
 <template>
   <main class="mvp">

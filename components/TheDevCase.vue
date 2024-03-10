@@ -2,9 +2,15 @@
 import { DataCase } from "~/stores/data-case.js";
 
 const dataCase = DataCase();
-onMounted(() => {
-  dataCase.getDevCase();
+
+const response = await $fetch("https://strapi.lymos.ru/api/dev-cases", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
 });
+
+dataCase.getDevCase(response);
 </script>
 
 <template>

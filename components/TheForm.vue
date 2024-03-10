@@ -5,9 +5,20 @@ import { DataForm } from "~/stores/data-form.js";
 const form = FormControl();
 const dataForm = DataForm();
 
-onMounted(() => {
-  dataForm.getFormData();
+const response = await $fetch("https://strapi.lymos.ru/api/forms/1", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
 });
+
+const respFormServ = await $fetch("https://strapi.lymos.ru/api/form-services", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+dataForm.getFormData(response, respFormServ);
 </script>
 <template>
   <div @click="form.changActivForm" class="dark-back">

@@ -1,5 +1,5 @@
 <template>
-  <div v-for="SwData in swiperData" :key="SwData.id">
+  <div v-for="SwData in dataSwiper.swiperData" :key="SwData.id">
     <NuxtLink
       :to="`/services/${SwData.attributes.url}`"
       class="services__slide swiper-slide"
@@ -27,14 +27,16 @@
   </div>
 </template>
 <script setup>
+import { DataSwiper } from "~/stores/data-swiper.js";
+const dataSwiper = DataSwiper();
+
 const response = await $fetch("https://strapi.lymos.ru/api/swipers?sort=id", {
   method: "GET",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },
 });
-
-const swiperData = response.data;
+dataSwiper.getSwiper(response);
 </script>
 <style scoped>
 @media (max-width: 990px) {

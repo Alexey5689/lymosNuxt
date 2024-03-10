@@ -8,127 +8,37 @@ export const DataPremiumPipe = defineStore("data-premium-pipe", {
     technologyLogos: [],
     weUseH2: "",
     designSystems: [],
-    contentPremiumPipeUl: [],
+    contentPremiumPipeUls: [],
     premiumPipeH1: "",
   }),
-  getters: {
-    getSwapIcons() {
-      return this.swapIcons;
-    },
-    getTechLogo() {
-      return this.technologyLogos;
-    },
-    getWeUse() {
-      return this.weUseH2;
-    },
-    getDesineSystem() {
-      return this.designSystems;
-    },
-    getContentPremiumPipe() {
-      return this.premiumPipeH1;
-    },
-    getContentPremiumPipeUl() {
-      return this.contentPremiumPipeUl;
-    },
-  },
+  getters: {},
   actions: {
-    async getPermPipeAbout() {
-      try {
-        const response = await $fetch(
-          "https://strapi.lymos.ru/api/premium-pipe-abouts",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.aboutProjects = response.data;
-      } catch (err) {
-        console.log(err);
-      }
+    getPermiumPipe(
+      respSwapIcons,
+      respTechnologyLogos,
+      responseWeUse,
+      responseDesignSystems,
+      respContentPremiumPipe,
+      responseContentPremiumPipeUl
+    ) {
+      this.swapIcons = respSwapIcons.data;
+      this.technologyLogos = respTechnologyLogos.data;
+
+      let tmpWeUse = responseWeUse.data;
+      this.weUseH2 = tmpWeUse.attributes.h2;
+
+      this.designSystems = responseDesignSystems.data;
+
+      let tmpPpcontent = respContentPremiumPipe.data;
+      this.premiumPipeH1 = tmpPpcontent.attributes.h1;
+
+      this.contentPremiumPipeUls = responseContentPremiumPipeUl.data;
     },
-    async getPermPipeConcepts() {
-      try {
-        const response = await $fetch(
-          "https://strapi.lymos.ru/api/premium-pipe-concepts",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.concepts = response.data;
-      } catch (err) {}
+    getPermPipeAbout(response) {
+      this.aboutProjects = response.data;
     },
-    async getPermiumPipe() {
-      try {
-        const respSwapIcons = await $fetch(
-          "https://strapi.lymos.ru/api/swap-icons",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.swapIcons = respSwapIcons.data;
-        const respTechnologyLogos = await $fetch(
-          "https://strapi.lymos.ru/api/technologies",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.technologyLogos = respTechnologyLogos.data;
-        const responseWeUse = await $fetch(
-          "https://strapi.lymos.ru/api/we-uses/1",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        let tmpWeUse = responseWeUse.data;
-        this.weUseH2 = tmpWeUse.attributes.h2;
-        const responseDesignSystems = await $fetch(
-          "https://strapi.lymos.ru/api/design-systems",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.designSystems = responseDesignSystems.data;
-        const respContentPremiumPipe = await $fetch(
-          "https://strapi.lymos.ru/api/content-premium-pipes/1",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        let tmpPpcontent = respContentPremiumPipe.data;
-        this.premiumPipeH1 = tmpPpcontent.attributes.h1;
-        const responseContentPremiumPipeUl = await $fetch(
-          "https://strapi.lymos.ru/api/content-premium-pipe-uls",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.contentPremiumPipeUl = responseContentPremiumPipeUl.data;
-      } catch (err) {
-        console.log(err);
-      }
+    getPermPipeConcepts(response) {
+      this.concepts = response.data;
     },
   },
 });

@@ -1,4 +1,6 @@
 <script setup>
+import { DataServices } from "~/stores/data-services.js";
+const dataServices = DataServices();
 const response = await $fetch(
   "https://strapi.lymos.ru/api/services?populate=*",
   {
@@ -8,14 +10,13 @@ const response = await $fetch(
     },
   }
 );
-
-const applicationServs = response.data;
+dataServices.getSerApplication(response);
 </script>
 
 <template>
   <section
     class="applications"
-    v-for="applicationServ in applicationServs"
+    v-for="applicationServ in dataServices.applicationServs"
     :key="applicationServ.id"
   >
     <div class="left_applications">

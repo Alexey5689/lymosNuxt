@@ -7,18 +7,18 @@ const titleDesc = DataTitleDesc();
 
 onMounted(() => {
   dataContact.getContacts();
-  titleDesc.getContactTitleDesc();
 });
+const titleResponse = await $fetch(
+  "https://strapi.lymos.ru/api/title-descriptions/8",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+titleDesc.getTitleDesc(titleResponse);
 
-// useHead({
-//   title: () => titleDesc.contactTitleDesc.title,
-//   meta: [
-//     {
-//       name: "description",
-//       content: () => titleDesc.contactTitleDesc.description,
-//     },
-//   ],
-// });
 useHead({
   title: () => titleDesc.titleDesc.title,
   meta: [

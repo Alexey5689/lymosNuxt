@@ -5,20 +5,17 @@ import { DataTitleDesc } from "~/stores/data-titleDesc.js";
 const titleDesc = DataTitleDesc();
 const dataMod = DataMod();
 
-onMounted(() => {
-  dataMod.getModData();
-  titleDesc.getModTitDesc();
-});
+const titleResponse = await $fetch(
+  "https://strapi.lymos.ru/api/title-descriptions/5",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+titleDesc.getTitleDesc(titleResponse);
 
-// useHead({
-//   title: () => titleDesc.modTitleDesc.title,
-//   meta: [
-//     {
-//       name: "description",
-//       content: () => titleDesc.modTitleDesc.description,
-//     },
-//   ],
-// });
 useHead({
   title: () => titleDesc.titleDesc.title,
   meta: [
@@ -28,6 +25,67 @@ useHead({
     },
   ],
 });
+
+const respArcHeaders = await $fetch(
+  "https://strapi.lymos.ru/api/mod-arc-headers",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+
+const respStepsDev = await $fetch(
+  "https://strapi.lymos.ru/api/mod-steps-devs",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respArcFooters = await $fetch(
+  "https://strapi.lymos.ru/api/mod-arc-footers",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respPageTitle = await $fetch(
+  "https://strapi.lymos.ru/api/mod-page-titles",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respSpotsFores = await $fetch(
+  "https://strapi.lymos.ru/api/mod-spots-fores",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respModViews = await $fetch("https://strapi.lymos.ru/api/mod-views", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+dataMod.getModData(
+  respArcHeaders,
+  respStepsDev,
+  respArcFooters,
+  respPageTitle,
+  respSpotsFores,
+  respModViews
+);
 </script>
 <template>
   <main class="modification">

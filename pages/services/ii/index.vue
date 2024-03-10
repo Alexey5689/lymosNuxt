@@ -5,20 +5,17 @@ import { DataTitleDesc } from "~/stores/data-titleDesc.js";
 const titleDesc = DataTitleDesc();
 const dataIi = DataIi();
 
-onMounted(() => {
-  dataIi.getIiData();
-  titleDesc.getIiTitDesc();
-});
+const titleResponse = await $fetch(
+  "https://strapi.lymos.ru/api/title-descriptions/6",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+titleDesc.getTitleDesc(titleResponse);
 
-// useHead({
-//   title: () => titleDesc.iiTitleDesc.title,
-//   meta: [
-//     {
-//       name: "description",
-//       content: () => titleDesc.iiTitleDesc.description,
-//     },
-//   ],
-// });
 useHead({
   title: () => titleDesc.titleDesc.title,
   meta: [
@@ -28,6 +25,65 @@ useHead({
     },
   ],
 });
+
+const respArcHeaders = await $fetch(
+  "https://strapi.lymos.ru/api/ii-arc-headers",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respStepsDev = await $fetch("https://strapi.lymos.ru/api/ii-steps-devs", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+
+const respArcFooters = await $fetch(
+  "https://strapi.lymos.ru/api/ii-arc-footers",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respPageTitle = await $fetch(
+  "https://strapi.lymos.ru/api/ii-page-titles",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+
+const respSpotsFores = await $fetch(
+  "https://strapi.lymos.ru/api/ii-spots-fores",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respIiViews = await $fetch("https://strapi.lymos.ru/api/ii-views", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+dataIi.getIiData(
+  respArcHeaders,
+  respStepsDev,
+  respArcFooters,
+  respPageTitle,
+  respSpotsFores,
+  respIiViews
+);
 </script>
 <template>
   <main class="ii">

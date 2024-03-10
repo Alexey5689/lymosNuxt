@@ -1,4 +1,10 @@
 <script setup>
+import { DataTitleDesc } from "~/stores/data-titleDesc.js";
+import { DataPremiumPipe } from "~/stores/data-premium-pipe.js";
+
+const dataPremiumPipe = DataPremiumPipe();
+const titleDesc = DataTitleDesc();
+
 const titleResponse = await $fetch(
   "https://strapi.lymos.ru/api/title-descriptions/2",
   {
@@ -8,25 +14,24 @@ const titleResponse = await $fetch(
     },
   }
 );
-const title = titleResponse.data.attributes.title;
-const description = titleResponse.data.attributes.description;
 
 useHead({
-  title: () => title,
+  title: () => titleDesc.titleDesc.title,
   meta: [
     {
       name: "description",
-      content: () => description,
+      content: () => titleDesc.titleDesc.description,
     },
   ],
 });
+titleDesc.getTitleDesc(titleResponse);
+
 const respSwapIcons = await $fetch("https://strapi.lymos.ru/api/swap-icons", {
   method: "GET",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },
 });
-const swapIcons = respSwapIcons.data;
 
 const respTechnologyLogos = await $fetch(
   "https://strapi.lymos.ru/api/technologies",
@@ -37,7 +42,6 @@ const respTechnologyLogos = await $fetch(
     },
   }
 );
-const technologyLogos = respTechnologyLogos.data;
 
 const responseContentPremiumPipeUl = await $fetch(
   "https://strapi.lymos.ru/api/content-premium-pipe-uls",
@@ -48,7 +52,6 @@ const responseContentPremiumPipeUl = await $fetch(
     },
   }
 );
-const contentPremiumPipeUls = responseContentPremiumPipeUl.data;
 
 const responseDesignSystems = await $fetch(
   "https://strapi.lymos.ru/api/design-systems",
@@ -59,7 +62,6 @@ const responseDesignSystems = await $fetch(
     },
   }
 );
-const designSystems = responseDesignSystems.data;
 
 const respContentPremiumPipe = await $fetch(
   "https://strapi.lymos.ru/api/content-premium-pipes/1",
@@ -70,30 +72,27 @@ const respContentPremiumPipe = await $fetch(
     },
   }
 );
-let tmpPpcontent = respContentPremiumPipe.data;
-const premiumPipeH1 = tmpPpcontent.attributes.h1;
-
 const responseWeUse = await $fetch("https://strapi.lymos.ru/api/we-uses/1", {
   method: "GET",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },
 });
-let tmpWeUse = responseWeUse.data;
-const weUseH2 = tmpWeUse.attributes.h2;
 
-// const swapIcons = [];
-// const technologyLogos = [];
-// const weUseH2 = "";
-// const designSystems = [];
-// const contentPremiumPipeUls = [];
-// const premiumPipeH1 = "";
+dataPremiumPipe.getPermiumPipe(
+  respSwapIcons,
+  respTechnologyLogos,
+  responseWeUse,
+  responseDesignSystems,
+  respContentPremiumPipe,
+  responseContentPremiumPipeUl
+);
 </script>
 <template>
   <main>
     <div class="swap_icons">
       <img
-        v-for="swapIcon in swapIcons"
+        v-for="swapIcon in dataPremiumPipe.swapIcons"
         :key="swapIcon.id"
         :src="swapIcon.attributes.swapIcon"
         :alt="swapIcon.attributes.swapAlt"
@@ -102,10 +101,10 @@ const weUseH2 = tmpWeUse.attributes.h2;
 
     <div class="wrapper">
       <div class="content premium_pipe">
-        <h1>{{ premiumPipeH1 }}</h1>
+        <h1>{{ dataPremiumPipe.premiumPipeH1 }}</h1>
         <ul>
           <li
-            v-for="contentPremiumPipeUl in contentPremiumPipeUls"
+            v-for="contentPremiumPipeUl in dataPremiumPipe.contentPremiumPipeUls"
             :key="contentPremiumPipeUl.id"
           >
             {{ contentPremiumPipeUl.attributes.li }}
@@ -117,10 +116,10 @@ const weUseH2 = tmpWeUse.attributes.h2;
         <TheConcept />
 
         <section class="we_used">
-          <h2>{{ weUseH2 }}</h2>
+          <h2>{{ dataPremiumPipe.weUseH2 }}</h2>
           <div class="technology_logos">
             <img
-              v-for="technologyLogo in technologyLogos"
+              v-for="technologyLogo in dataPremiumPipe.technologyLogos"
               :key="technologyLogo.id"
               :src="technologyLogo.attributes.techLogo"
               :alt="technologyLogo.attributes.techAlt"
@@ -131,7 +130,7 @@ const weUseH2 = tmpWeUse.attributes.h2;
     </div>
 
     <section
-      v-for="designSystem in designSystems"
+      v-for="designSystem in dataPremiumPipe.designSystems"
       :key="designSystem.id"
       class="design_system"
     >

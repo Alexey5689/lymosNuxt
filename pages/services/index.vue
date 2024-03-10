@@ -1,4 +1,10 @@
 <script setup>
+import { DataTitleDesc } from "~/stores/data-titleDesc.js";
+import { DataServices } from "~/stores/data-services.js";
+
+const dataServices = DataServices();
+const titleDesc = DataTitleDesc();
+
 const titleResponse = await $fetch(
   "https://strapi.lymos.ru/api/title-descriptions/9",
   {
@@ -8,15 +14,14 @@ const titleResponse = await $fetch(
     },
   }
 );
-const title = titleResponse.data.attributes.title;
-const description = titleResponse.data.attributes.description;
+titleDesc.getTitleDesc(titleResponse);
 
 useHead({
-  title: () => title,
+  title: () => titleDesc.titleDesc.title,
   meta: [
     {
       name: "description",
-      content: () => description,
+      content: () => titleDesc.titleDesc.description,
     },
   ],
 });
@@ -30,18 +35,16 @@ const respServicesView = await $fetch(
     },
   }
 );
-let tmp = respServicesView.data;
-const servicesViewH1 = tmp.attributes.h1;
-const servicesViewH4 = tmp.attributes.h4;
+dataServices.getServices(respServicesView);
 </script>
 <template>
   <main>
     <TheSpots />
     <div class="wrapper">
       <div class="content amenities">
-        <h1 class="title_amenities">{{ servicesViewH1 }}</h1>
+        <h1 class="title_amenities">{{ dataServices.servicesViewH1 }}</h1>
         <h4 class="description_amenities">
-          {{ servicesViewH4 }}
+          {{ dataServices.servicesViewH4 }}
         </h4>
         <TheSerApplications />
       </div>

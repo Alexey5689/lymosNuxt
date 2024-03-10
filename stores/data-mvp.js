@@ -10,71 +10,20 @@ export const DataMvp = defineStore("data-mvp", {
     mvpViews: [],
   }),
   actions: {
-    async getMvpData() {
-      try {
-        const respArcHeaders = await $fetch(
-          "https://strapi.lymos.ru/api/mvp-arc-headers",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.arcHeaders = respArcHeaders.data;
-        const respStepsDev = await $fetch(
-          "https://strapi.lymos.ru/api/mvp-steps-devs",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.stepsDev = respStepsDev.data;
-        const respArcFooters = await $fetch(
-          "https://strapi.lymos.ru/api/mvp-arc-footers",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.arcFooters = respArcFooters.data;
-        const respPageTitle = await $fetch(
-          "https://strapi.lymos.ru/api/mvp-page-titles",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.pageTitle = respPageTitle.data;
-        const respSpotsFores = await $fetch(
-          "https://strapi.lymos.ru/api/mvp-spots-fores",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.spotsFores = respSpotsFores.data;
-        const respMvpViews = await $fetch(
-          "https://strapi.lymos.ru/api/mvp-views",
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/x-www-form-urlencoded",
-            },
-          }
-        );
-        this.mvpViews = respMvpViews.data;
-      } catch (err) {
-        console.log(err);
-      }
+    getMvpData(
+      respArcHeaders,
+      respStepsDev,
+      respArcFooters,
+      respPageTitle,
+      respSpotsFores,
+      respMvpViews
+    ) {
+      this.arcHeaders = respArcHeaders.data;
+      this.stepsDev = respStepsDev.data;
+      this.arcFooters = respArcFooters.data;
+      this.pageTitle = respPageTitle.data;
+      this.spotsFores = respSpotsFores.data;
+      this.mvpViews = respMvpViews.data;
     },
   },
 });

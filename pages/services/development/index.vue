@@ -5,20 +5,17 @@ import { DataTitleDesc } from "~/stores/data-titleDesc.js";
 const titleDesc = DataTitleDesc();
 const dataDev = DataDev();
 
-onMounted(() => {
-  dataDev.getDevData();
-  titleDesc.getDevTitDesc();
-});
+const titleResponse = await $fetch(
+  "https://strapi.lymos.ru/api/title-descriptions/7",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+titleDesc.getTitleDesc(titleResponse);
 
-// useHead({
-//   title: () => titleDesc.devTitleDesc.title,
-//   meta: [
-//     {
-//       name: "description",
-//       content: () => titleDesc.devTitleDesc.description,
-//     },
-//   ],
-// });
 useHead({
   title: () => titleDesc.titleDesc.title,
   meta: [
@@ -28,6 +25,66 @@ useHead({
     },
   ],
 });
+const respArcHeaders = await $fetch(
+  "https://strapi.lymos.ru/api/dev-arc-headers",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respStepsDev = await $fetch(
+  "https://strapi.lymos.ru/api/dev-steps-devs",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respArcFooters = await $fetch(
+  "https://strapi.lymos.ru/api/dev-arc-footers",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+
+const respPageTitle = await $fetch(
+  "https://strapi.lymos.ru/api/dev-page-titles",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respSpotsFores = await $fetch(
+  "https://strapi.lymos.ru/api/dev-spots-fores",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respDevViews = await $fetch("https://strapi.lymos.ru/api/dev-views", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+dataDev.getDevData(
+  respArcHeaders,
+  respStepsDev,
+  respArcFooters,
+  respPageTitle,
+  respSpotsFores,
+  respDevViews
+);
 </script>
 <template>
   <main class="development">

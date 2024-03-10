@@ -1,11 +1,9 @@
 <script setup>
+import { DataTitleDesc } from "~/stores/data-titleDesc.js";
 import { DataPortfolio } from "~/stores/data-portfolio.js";
 
 const dataPortfolio = DataPortfolio();
-
-onMounted(() => {
-  dataPortfolio.getPortfolio();
-});
+const titleDesc = DataTitleDesc();
 
 const titleResponse = await $fetch(
   "https://strapi.lymos.ru/api/title-descriptions/3",
@@ -17,14 +15,14 @@ const titleResponse = await $fetch(
   }
 );
 
-const title = titleResponse.data.attributes.title;
-const description = titleResponse.data.attributes.description;
+titleDesc.getTitleDesc(titleResponse);
+
 useHead({
-  title: () => title,
+  title: () => titleDesc.titleDesc.title,
   meta: [
     {
       name: "description",
-      content: () => description,
+      content: () => titleDesc.titleDesc.description,
     },
   ],
 });
@@ -38,7 +36,7 @@ const respPortfolioPage = await $fetch(
     },
   }
 );
-const portfolioTitleH1 = respPortfolioPage.data.attributes.h1;
+dataPortfolio.getPortfolioH1(respPortfolioPage);
 </script>
 <script>
 export default {
@@ -72,7 +70,7 @@ export default {
     <TheSpots />
     <div class="wrapper">
       <div class="content portfolio">
-        <h1 class="title_portfolio">{{ portfolioTitleH1 }}</h1>
+        <h1 class="title_portfolio">{{ dataPortfolio.portfolioTitleH1 }}</h1>
         <div class="nav_category">
           <ul>
             <TheSwiperCategory v-if="isMobile" />
