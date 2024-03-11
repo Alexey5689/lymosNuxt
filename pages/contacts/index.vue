@@ -1,14 +1,10 @@
 <script setup>
 import { DataContact } from "~/stores/data-contacts.js";
 import { DataTitleDesc } from "~/stores/data-titleDesc.js";
-import { DataHeaderFooter } from "~/stores/data-headerFooter.js";
 
 const dataContact = DataContact();
 const titleDesc = DataTitleDesc();
 
-onMounted(() => {
-  dataContact.getContacts();
-});
 const titleResponse = await $fetch(
   "https://strapi.lymos.ru/api/title-descriptions/8",
   {
