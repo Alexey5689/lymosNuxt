@@ -1,6 +1,7 @@
 <script setup>
 import { DataContact } from "~/stores/data-contacts.js";
 import { DataTitleDesc } from "~/stores/data-titleDesc.js";
+import { DataHeaderFooter } from "~/stores/data-headerFooter.js";
 
 const dataContact = DataContact();
 const titleDesc = DataTitleDesc();
@@ -28,6 +29,27 @@ useHead({
     },
   ],
 });
+
+const respContacts = await $fetch("https://strapi.lymos.ru/api/contacts/1", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+const respSocials = await $fetch("https://strapi.lymos.ru/api/header-socials", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+const response = await $fetch("https://strapi.lymos.ru/api/headers/1", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+
+dataContact.getContacts(respContacts, respSocials, response);
 </script>
 <template>
   <main>
@@ -53,8 +75,8 @@ useHead({
                 v-for="socialNetwork in dataContact.socialNetworks"
                 :key="socialNetwork.id"
               >
-                <a :href="socialNetwork.attributes.href" target="_blank">{{
-                  socialNetwork.attributes.a
+                <a :href="socialNetwork.attributes.a_href" target="_blank">{{
+                  socialNetwork.attributes.a_social
                 }}</a>
               </li>
             </ul>
@@ -66,30 +88,24 @@ useHead({
                 v-for="messenger in dataContact.messengers"
                 :key="messenger.id"
               >
-                <a :href="messenger.attributes.href" target="_blank">{{
-                  messenger.attributes.a
+                <a :href="messenger.attributes.a_href" target="_blank">{{
+                  messenger.attributes.a_social
                 }}</a>
               </li>
             </ul>
           </div>
           <div class="phone_number">
+            <!-- target="_blank" -->
             <h4>{{ dataContact.phone_number_h4 }}</h4>
-            <a
-              v-for="phoneNumber in dataContact.phoneNumbers"
-              :key="phoneNumber.id"
-              :href="phoneNumber.attributes.href"
-              target="_blank"
-              >{{ phoneNumber.attributes.a }}</a
-            >
+            <a :href="`tel:${dataContact.a_href_tel}`">{{
+              dataContact.a_tel
+            }}</a>
           </div>
           <div class="email">
             <h4>{{ dataContact.email_h4 }}</h4>
-            <a
-              v-for="email in dataContact.emails"
-              :key="email.id"
-              :href="email.attributes.href"
-              >{{ email.attributes.a }}</a
-            >
+            <a :href="`mailto:${dataContact.a_href_mail}`">{{
+              dataContact.a_mail
+            }}</a>
           </div>
         </div>
       </div>

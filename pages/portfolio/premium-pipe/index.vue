@@ -72,17 +72,10 @@ const respContentPremiumPipe = await $fetch(
     },
   }
 );
-const responseWeUse = await $fetch("https://strapi.lymos.ru/api/we-uses/1", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
 
 dataPremiumPipe.getPermiumPipe(
   respSwapIcons,
   respTechnologyLogos,
-  responseWeUse,
   responseDesignSystems,
   respContentPremiumPipe,
   responseContentPremiumPipeUl

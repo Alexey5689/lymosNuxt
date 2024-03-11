@@ -23,7 +23,8 @@ const dataFooter = DataHeaderFooter();
         }"
       >
         <p class="footer__switcher-left">
-          Зона активного поля <span>навигации</span>
+          {{ dataFooter.activeFieldZone }}
+          <span>{{ dataFooter.navigation }}</span>
         </p>
       </div>
 
@@ -37,7 +38,8 @@ const dataFooter = DataHeaderFooter();
         }"
       >
         <p class="footer__switcher-right">
-          Зона активного поля <span>контактов</span>
+          {{ dataFooter.activeFieldZone }}
+          <span>{{ dataFooter.contact }}</span>
         </p>
       </div>
 
@@ -79,10 +81,12 @@ const dataFooter = DataHeaderFooter();
         }"
       >
         <div class="footer__contacts">
-          <a :href="dataFooter.a_href_tel" class="footer__phone">{{
+          <a :href="`tel:${dataFooter.a_href_tel}`" class="footer__phone">{{
             dataFooter.a_tel
           }}</a>
-          <a :href="dataFooter.a_href_mail" class="footer__phone">Наша почта</a>
+          <a :href="`mailto:${dataFooter.a_href_mail}`" class="footer__phone">{{
+            dataFooter.a_myMail
+          }}</a>
           <!-- info@lymos.ru -->
         </div>
         <div class="footer__links">
@@ -98,7 +102,7 @@ const dataFooter = DataHeaderFooter();
     </div>
 
     <div class="footer_tel_rights">
-      <a :href="dataFooter.a_href_tel">{{ dataFooter.a_tel }}</a>
+      <a :href="`tel:${dataFooter.a_href_tel}`">{{ dataFooter.a_tel }}</a>
       <p>{{ dataFooter.copyrightP }}</p>
     </div>
   </footer>

@@ -16,7 +16,6 @@ export const DataPremiumPipe = defineStore("data-premium-pipe", {
     getPermiumPipe(
       respSwapIcons,
       respTechnologyLogos,
-      responseWeUse,
       responseDesignSystems,
       respContentPremiumPipe,
       responseContentPremiumPipeUl
@@ -24,13 +23,11 @@ export const DataPremiumPipe = defineStore("data-premium-pipe", {
       this.swapIcons = respSwapIcons.data;
       this.technologyLogos = respTechnologyLogos.data;
 
-      let tmpWeUse = responseWeUse.data;
-      this.weUseH2 = tmpWeUse.attributes.h2;
-
       this.designSystems = responseDesignSystems.data;
 
       let tmpPpcontent = respContentPremiumPipe.data;
       this.premiumPipeH1 = tmpPpcontent.attributes.h1;
+      this.weUseH2 = tmpPpcontent.attributes.h2;
 
       this.contentPremiumPipeUls = responseContentPremiumPipeUl.data;
     },

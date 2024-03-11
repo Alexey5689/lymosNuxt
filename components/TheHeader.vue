@@ -4,9 +4,28 @@ import { FormControl } from "~/stores/form-control.js";
 
 const dataHeader = DataHeaderFooter();
 const form = FormControl();
-onMounted(() => {
-  dataHeader.getHeaderFooter();
+
+const response = await $fetch("https://strapi.lymos.ru/api/headers/1", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
 });
+
+const respSocials = await $fetch("https://strapi.lymos.ru/api/header-socials", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+const respNavigation = await $fetch("https://strapi.lymos.ru/api/header-navs", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+
+dataHeader.getHeaderFooter(response, respSocials, respNavigation);
 </script>
 <script>
 export default {
@@ -85,9 +104,11 @@ export default {
           </nav>
 
           <div class="right-contacts">
-            <a :href="dataHeader.a_href_tel">{{ dataHeader.a_tel }}</a>
+            <a :href="`tel:${dataHeader.a_href_tel}`">{{ dataHeader.a_tel }}</a>
             <span class="dropdown__divider"></span>
-            <a :href="dataHeader.a_href_mail">{{ dataHeader.a_mail }}</a>
+            <a :href="`mailto:${dataHeader.a_href_mail}`">{{
+              dataHeader.a_mail
+            }}</a>
           </div>
         </div>
       </div>
@@ -128,8 +149,10 @@ export default {
           </ul>
         </nav>
         <div class="left-mobile-contacts">
-          <a :href="dataHeader.a_href_tel">{{ dataHeader.a_tel }}</a>
-          <a :href="dataHeader.a_href_mail">{{ dataHeader.a_mail }}</a>
+          <a :href="`tel:${dataHeader.a_href_tel}`">{{ dataHeader.a_tel }}</a>
+          <a :href="`mailto:${dataHeader.a_href_mail}`">{{
+            dataHeader.a_mail
+          }}</a>
           <!-- info@lymos.ru -->
         </div>
 
@@ -185,7 +208,7 @@ export default {
       </div>
       <ul class="header__right-side">
         <li class="header__right-item">
-          <a :href="dataHeader.a_href_tel">{{ dataHeader.a_tel }}</a>
+          <a :href="`tel:${dataHeader.a_href_tel}`">{{ dataHeader.a_tel }}</a>
         </li>
         <li>
           <a class="btn-order" @click="form.changActivForm"
