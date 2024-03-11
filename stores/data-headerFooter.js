@@ -15,11 +15,15 @@ export const DataHeaderFooter = defineStore("data-headerFooter", {
     headerMenues: [],
     contact: "",
     navigation: "",
+    socialNetworks: [],
+    messengers: [],
   }),
 
   actions: {
     getHeaderFooter(response, respSocials, respNavigation) {
       this.headerMenues = [];
+      this.messengers = [];
+      this.socialNetworks = [];
       let tmp = response.data;
       this.copyrightP = tmp.attributes.copyright_p;
       this.a_href_tel = tmp.attributes.a_href_tel;
@@ -34,6 +38,8 @@ export const DataHeaderFooter = defineStore("data-headerFooter", {
       this.menuButtonP = tmp.attributes.menuButtonP;
 
       this.socials = respSocials.data;
+      this.messengers.push(respSocials.data[1], respSocials.data[2]);
+      this.socialNetworks.push(respSocials.data[0], respSocials.data[3]);
 
       this.navigations = respNavigation.data;
       this.headerMenues.push(respNavigation.data[2], respNavigation.data[0]);

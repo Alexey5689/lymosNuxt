@@ -1,9 +1,11 @@
 <script setup>
 import { DataContact } from "~/stores/data-contacts.js";
 import { DataTitleDesc } from "~/stores/data-titleDesc.js";
+import { DataHeaderFooter } from "~/stores/data-headerFooter.js";
 
 const dataContact = DataContact();
 const titleDesc = DataTitleDesc();
+const contacts = DataHeaderFooter();
 
 const titleResponse = await $fetch(
   "https://strapi.lymos.ru/api/title-descriptions/8",
@@ -32,20 +34,8 @@ const respContacts = await $fetch("https://strapi.lymos.ru/api/contacts/1", {
     "Content-Type": "application/x-www-form-urlencoded",
   },
 });
-const respSocials = await $fetch("https://strapi.lymos.ru/api/header-socials", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
-const response = await $fetch("https://strapi.lymos.ru/api/headers/1", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
 
-dataContact.getContacts(respContacts, respSocials, response);
+dataContact.getContacts(respContacts);
 </script>
 <template>
   <main>
@@ -68,7 +58,7 @@ dataContact.getContacts(respContacts, respSocials, response);
             <h4>{{ dataContact.social_network_h4 }}</h4>
             <ul>
               <li
-                v-for="socialNetwork in dataContact.socialNetworks"
+                v-for="socialNetwork in contacts.socialNetworks"
                 :key="socialNetwork.id"
               >
                 <a :href="socialNetwork.attributes.a_href" target="_blank">{{
@@ -80,10 +70,7 @@ dataContact.getContacts(respContacts, respSocials, response);
           <div class="messengers">
             <h4>{{ dataContact.messengers_h4 }}</h4>
             <ul>
-              <li
-                v-for="messenger in dataContact.messengers"
-                :key="messenger.id"
-              >
+              <li v-for="messenger in contacts.messengers" :key="messenger.id">
                 <a :href="messenger.attributes.a_href" target="_blank">{{
                   messenger.attributes.a_social
                 }}</a>
@@ -93,14 +80,12 @@ dataContact.getContacts(respContacts, respSocials, response);
           <div class="phone_number">
             <!-- target="_blank" -->
             <h4>{{ dataContact.phone_number_h4 }}</h4>
-            <a :href="`tel:${dataContact.a_href_tel}`">{{
-              dataContact.a_tel
-            }}</a>
+            <a :href="`tel:${contacts.a_href_tel}`">{{ contacts.a_tel }}</a>
           </div>
           <div class="email">
             <h4>{{ dataContact.email_h4 }}</h4>
-            <a :href="`mailto:${dataContact.a_href_mail}`">{{
-              dataContact.a_mail
+            <a :href="`mailto:${contacts.a_href_mail}`">{{
+              contacts.a_mail
             }}</a>
           </div>
         </div>

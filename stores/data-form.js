@@ -9,6 +9,10 @@ export const DataForm = defineStore("data-form", {
     buttonBack: "",
     buttonSend: "",
     formServs: [],
+    myName: "",
+    fromCompany: "",
+    myPhone: "",
+    myEmail: "",
   }),
   actions: {
     getFormData(response, respFormServ) {
@@ -21,6 +25,11 @@ export const DataForm = defineStore("data-form", {
       this.buttonSend = tmp.attributes.buttonSend;
 
       this.formServs = respFormServ.data;
+
+      this.myName = tmp.attributes.myName;
+      this.fromCompany = tmp.attributes.fromCompany;
+      this.myPhone = tmp.attributes.myPhone;
+      this.myEmail = tmp.attributes.myEmail;
     },
   },
 });

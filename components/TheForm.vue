@@ -71,11 +71,11 @@ dataForm.getFormData(response, respFormServ);
           </div>
           <div class="profile">
             <div class="input-wrapper">
-              <p class="input-title">Меня зовут</p>
+              <p class="input-title">{{ dataForm.myName }}</p>
               <input type="text" v-model.trim="form.name" autocomplete="off" />
             </div>
             <div class="input-wrapper">
-              <p class="input-title">Я представляю компанию</p>
+              <p class="input-title">{{ dataForm.fromCompany }}</p>
               <input
                 type="text"
                 v-model.trim="form.company"
@@ -83,7 +83,7 @@ dataForm.getFormData(response, respFormServ);
               />
             </div>
             <div class="input-wrapper">
-              <p class="input-title">Мой телефон</p>
+              <p class="input-title">{{ dataForm.myPhone }}</p>
               <input
                 id="phoneNumber"
                 type="text"
@@ -94,7 +94,7 @@ dataForm.getFormData(response, respFormServ);
               />
             </div>
             <div class="input-wrapper">
-              <p class="input-title">Моя почта</p>
+              <p class="input-title">{{ dataForm.myEmail }}</p>
               <input
                 type="email"
                 v-bind:title="form.emailPattern"

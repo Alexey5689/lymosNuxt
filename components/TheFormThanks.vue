@@ -1,6 +1,18 @@
 <script setup>
 import { FormControl } from "~/stores/form-control.js";
+import { DataThanksForm } from "~/stores/data-formThanks.js";
+
+const dataThanksForm = DataThanksForm();
 const form = FormControl();
+
+const response = await $fetch("https://strapi.lymos.ru/api/thanks-froms/1", {
+  method: "GET",
+  headers: {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+});
+
+dataThanksForm.getThanksForm(response);
 </script>
 
 <template>
@@ -23,16 +35,17 @@ const form = FormControl();
             />
           </svg>
         </div>
-        <h4>Форма успешно отправлена!</h4>
+        <h4>{{ dataThanksForm.thanksH4 }}</h4>
         <p>
-          Мы перезвоним вам в течении 30 минут, а пока, можете посмотреть услуги
-          или кейсы
+          {{ dataThanksForm.thanksP }}
         </p>
         <div class="transitions">
           <ul>
             <li>
-              <NuxtLink to="/services" @click="form.changeThanksFormState()"
-                >Услуги
+              <NuxtLink
+                :to="`/${dataThanksForm.services_to}`"
+                @click="form.changeThanksFormState()"
+                >{{ dataThanksForm.services }}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
@@ -50,8 +63,10 @@ const form = FormControl();
               </NuxtLink>
             </li>
             <li>
-              <NuxtLink to="/portfolio" @click="form.changeThanksFormState()"
-                >Портфолио
+              <NuxtLink
+                :to="`/${dataThanksForm.portfolio_to}`"
+                @click="form.changeThanksFormState()"
+                >{{ dataThanksForm.portfolio }}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="32"
