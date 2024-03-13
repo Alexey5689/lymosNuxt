@@ -26,15 +26,18 @@ useHead({
 });
 titleDesc.getTitleDesc(titleResponse);
 
-const respSwapIcons = await $fetch("https://strapi.lymos.ru/api/swap-icons", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
+const respSwapIcons = await $fetch(
+  "https://strapi.lymos.ru/api/swap-icons?sort=id",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 
 const respTechnologyLogos = await $fetch(
-  "https://strapi.lymos.ru/api/technologies",
+  "https://strapi.lymos.ru/api/technologies?sort=id",
   {
     method: "GET",
     headers: {
@@ -44,7 +47,7 @@ const respTechnologyLogos = await $fetch(
 );
 
 const responseContentPremiumPipeUl = await $fetch(
-  "https://strapi.lymos.ru/api/content-premium-pipe-uls",
+  "https://strapi.lymos.ru/api/content-premium-pipe-uls?sort=id",
   {
     method: "GET",
     headers: {
@@ -54,7 +57,7 @@ const responseContentPremiumPipeUl = await $fetch(
 );
 
 const responseDesignSystems = await $fetch(
-  "https://strapi.lymos.ru/api/design-systems",
+  "https://strapi.lymos.ru/api/design-systems?sort=id",
   {
     method: "GET",
     headers: {

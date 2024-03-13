@@ -12,18 +12,24 @@ const response = await $fetch("https://strapi.lymos.ru/api/headers/1", {
   },
 });
 
-const respSocials = await $fetch("https://strapi.lymos.ru/api/header-socials", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
-const respNavigation = await $fetch("https://strapi.lymos.ru/api/header-navs", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
+const respSocials = await $fetch(
+  "https://strapi.lymos.ru/api/header-socials?sort=id",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
+const respNavigation = await $fetch(
+  "https://strapi.lymos.ru/api/header-navs?sort=id",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 
 dataHeader.getHeaderFooter(response, respSocials, respNavigation);
 </script>

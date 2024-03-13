@@ -33,7 +33,7 @@ const homeResponse = await $fetch("https://strapi.lymos.ru/api/home-views/1", {
   },
 });
 const respBenefits = await $fetch(
-  "https://strapi.lymos.ru/api/home-view-benefits-h4s",
+  "https://strapi.lymos.ru/api/home-view-benefits-h4s?sort=id",
   {
     method: "GET",
     headers: {
@@ -42,7 +42,8 @@ const respBenefits = await $fetch(
   }
 );
 const respAbout = await $fetch(
-  "https://strapi.lymos.ru/api/home-view-about-ps",
+  "https://strapi.lymos.ru/api/home-view-about-ps?sort=id",
+  //
   {
     method: "GET",
     headers: {
@@ -52,7 +53,7 @@ const respAbout = await $fetch(
 );
 
 const respAboutBlock = await $fetch(
-  "https://strapi.lymos.ru/api/home-view-about-block-ps",
+  "https://strapi.lymos.ru/api/home-view-about-block-ps?sort=id",
   {
     method: "GET",
     headers: {

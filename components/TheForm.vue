@@ -12,12 +12,15 @@ const response = await $fetch("https://strapi.lymos.ru/api/forms/1", {
   },
 });
 
-const respFormServ = await $fetch("https://strapi.lymos.ru/api/form-services", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
+const respFormServ = await $fetch(
+  "https://strapi.lymos.ru/api/form-services?sort=id",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 dataForm.getFormData(response, respFormServ);
 </script>
 <template>

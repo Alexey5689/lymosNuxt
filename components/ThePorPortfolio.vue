@@ -2,12 +2,15 @@
 import { DataPortfolio } from "~/stores/data-portfolio.js";
 const dataPortfolio = DataPortfolio();
 
-const response = await $fetch("https://strapi.lymos.ru/api/portfolios", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
+const response = await $fetch(
+  "https://strapi.lymos.ru/api/portfolios?sort=id",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 dataPortfolio.getPortfolio(response);
 </script>
 

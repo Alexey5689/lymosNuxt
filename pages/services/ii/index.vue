@@ -27,7 +27,7 @@ useHead({
 });
 
 const respArcHeaders = await $fetch(
-  "https://strapi.lymos.ru/api/ii-arc-headers",
+  "https://strapi.lymos.ru/api/ii-arc-headers?sort=id",
   {
     method: "GET",
     headers: {
@@ -35,15 +35,18 @@ const respArcHeaders = await $fetch(
     },
   }
 );
-const respStepsDev = await $fetch("https://strapi.lymos.ru/api/ii-steps-devs", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
+const respStepsDev = await $fetch(
+  "https://strapi.lymos.ru/api/ii-steps-devs?sort=id",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 
 const respArcFooters = await $fetch(
-  "https://strapi.lymos.ru/api/ii-arc-footers",
+  "https://strapi.lymos.ru/api/ii-arc-footers?sort=id",
   {
     method: "GET",
     headers: {
@@ -52,7 +55,7 @@ const respArcFooters = await $fetch(
   }
 );
 const respPageTitle = await $fetch(
-  "https://strapi.lymos.ru/api/ii-page-titles",
+  "https://strapi.lymos.ru/api/ii-page-titles?sort=id",
   {
     method: "GET",
     headers: {
@@ -62,7 +65,7 @@ const respPageTitle = await $fetch(
 );
 
 const respSpotsFores = await $fetch(
-  "https://strapi.lymos.ru/api/ii-spots-fores",
+  "https://strapi.lymos.ru/api/ii-spots-fores?sort=id",
   {
     method: "GET",
     headers: {
@@ -70,12 +73,15 @@ const respSpotsFores = await $fetch(
     },
   }
 );
-const respIiViews = await $fetch("https://strapi.lymos.ru/api/ii-views", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
+const respIiViews = await $fetch(
+  "https://strapi.lymos.ru/api/ii-views?sort=id",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 dataIi.getIiData(
   respArcHeaders,
   respStepsDev,

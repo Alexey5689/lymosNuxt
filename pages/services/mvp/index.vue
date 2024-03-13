@@ -27,7 +27,7 @@ useHead({
 });
 
 const respArcHeaders = await $fetch(
-  "https://strapi.lymos.ru/api/mvp-arc-headers",
+  "https://strapi.lymos.ru/api/mvp-arc-headers?sort=id",
   {
     method: "GET",
     headers: {
@@ -36,7 +36,7 @@ const respArcHeaders = await $fetch(
   }
 );
 const respStepsDev = await $fetch(
-  "https://strapi.lymos.ru/api/mvp-steps-devs",
+  "https://strapi.lymos.ru/api/mvp-steps-devs?sort=id",
   {
     method: "GET",
     headers: {
@@ -46,7 +46,7 @@ const respStepsDev = await $fetch(
 );
 
 const respArcFooters = await $fetch(
-  "https://strapi.lymos.ru/api/mvp-arc-footers",
+  "https://strapi.lymos.ru/api/mvp-arc-footers?sort=id",
   {
     method: "GET",
     headers: {
@@ -56,7 +56,7 @@ const respArcFooters = await $fetch(
 );
 
 const respPageTitle = await $fetch(
-  "https://strapi.lymos.ru/api/mvp-page-titles",
+  "https://strapi.lymos.ru/api/mvp-page-titles?sort=id",
   {
     method: "GET",
     headers: {
@@ -66,7 +66,7 @@ const respPageTitle = await $fetch(
 );
 
 const respSpotsFores = await $fetch(
-  "https://strapi.lymos.ru/api/mvp-spots-fores",
+  "https://strapi.lymos.ru/api/mvp-spots-fores?sort=id",
   {
     method: "GET",
     headers: {
@@ -74,12 +74,15 @@ const respSpotsFores = await $fetch(
     },
   }
 );
-const respMvpViews = await $fetch("https://strapi.lymos.ru/api/mvp-views", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
+const respMvpViews = await $fetch(
+  "https://strapi.lymos.ru/api/mvp-views?sort=id",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 dataMvp.getMvpData(
   respArcHeaders,
   respStepsDev,

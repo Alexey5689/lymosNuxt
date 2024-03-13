@@ -3,7 +3,7 @@ import { DataPremiumPipe } from "~/stores/data-premium-pipe.js";
 const dataAboutProject = DataPremiumPipe();
 
 const response = await $fetch(
-  "https://strapi.lymos.ru/api/premium-pipe-abouts",
+  "https://strapi.lymos.ru/api/premium-pipe-abouts?sort=id",
   {
     method: "GET",
     headers: {

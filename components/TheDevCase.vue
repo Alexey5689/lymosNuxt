@@ -3,7 +3,7 @@ import { DataCase } from "~/stores/data-case.js";
 
 const dataCase = DataCase();
 
-const response = await $fetch("https://strapi.lymos.ru/api/dev-cases", {
+const response = await $fetch("https://strapi.lymos.ru/api/dev-cases?sort=id", {
   method: "GET",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
