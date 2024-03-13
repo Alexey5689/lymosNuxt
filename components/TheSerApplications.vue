@@ -2,7 +2,7 @@
 import { DataServices } from "~/stores/data-services.js";
 const dataServices = DataServices();
 const response = await $fetch(
-  "https://strapi.lymos.ru/api/services?populate=*",
+  "https://strapi.lymos.ru/api/services?sort=id&populate=*",
   {
     method: "GET",
     headers: {
