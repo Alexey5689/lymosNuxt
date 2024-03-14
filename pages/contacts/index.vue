@@ -85,7 +85,7 @@ dataContact.getContacts(respContacts);
           <div class="email">
             <h4>{{ dataContact.email_h4 }}</h4>
             <a :href="`mailto:${contacts.a_href_mail}`">{{
-              contacts.a_mail
+              contacts.a_href_mail
             }}</a>
           </div>
         </div>

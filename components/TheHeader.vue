@@ -113,7 +113,7 @@ export default {
             <a :href="`tel:${dataHeader.a_href_tel}`">{{ dataHeader.a_tel }}</a>
             <span class="dropdown__divider"></span>
             <a :href="`mailto:${dataHeader.a_href_mail}`">{{
-              dataHeader.a_mail
+              dataHeader.a_href_mail
             }}</a>
           </div>
         </div>
@@ -157,7 +157,7 @@ export default {
         <div class="left-mobile-contacts">
           <a :href="`tel:${dataHeader.a_href_tel}`">{{ dataHeader.a_tel }}</a>
           <a :href="`mailto:${dataHeader.a_href_mail}`">{{
-            dataHeader.a_mail
+            dataHeader.a_href_mail
           }}</a>
           <!-- info@lymos.ru -->
         </div>

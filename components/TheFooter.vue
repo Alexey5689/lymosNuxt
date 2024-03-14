@@ -85,7 +85,7 @@ const dataFooter = DataHeaderFooter();
             dataFooter.a_tel
           }}</a>
           <a :href="`mailto:${dataFooter.a_href_mail}`" class="footer__phone">{{
-            dataFooter.a_myMail
+            dataFooter.a_href_mail
           }}</a>
           <!-- info@lymos.ru -->
         </div>

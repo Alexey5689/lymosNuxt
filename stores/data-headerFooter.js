@@ -5,9 +5,9 @@ export const DataHeaderFooter = defineStore("data-headerFooter", {
     a_href_tel: "",
     a_tel: "",
     a_href_mail: "",
-    a_mail: "",
+
     a_orderProject: "",
-    a_myMail: "",
+
     menuButtonP: "",
     activeFieldZone: "",
     socials: [],
@@ -29,9 +29,9 @@ export const DataHeaderFooter = defineStore("data-headerFooter", {
       this.a_href_tel = tmp.attributes.a_href_tel;
       this.a_tel = tmp.attributes.a_tel;
       this.a_href_mail = tmp.attributes.a_href_mail;
-      this.a_mail = tmp.attributes.a_mail;
+
       this.a_orderProject = tmp.attributes.a_orderProject;
-      this.a_myMail = tmp.attributes.a_myMail;
+
       this.activeFieldZone = tmp.attributes.activeFieldZone;
       this.contact = tmp.attributes.contacts;
       this.navigation = tmp.attributes.navigations;
