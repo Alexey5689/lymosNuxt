@@ -24,7 +24,7 @@ export default {
       </div>
       <div
         class="right_product_dev"
-        :v-html="pageTitle.attributes.pageIcon"
+        v-html="pageTitle.attributes.pageIcon"
       ></div>
     </div>
   </div>
