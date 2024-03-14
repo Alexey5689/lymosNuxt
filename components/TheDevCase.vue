@@ -3,12 +3,15 @@ import { DataCase } from "~/stores/data-case.js";
 
 const dataCase = DataCase();
 
-const response = await $fetch("https://strapi.lymos.ru/api/dev-cases?sort=id", {
-  method: "GET",
-  headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
-  },
-});
+const response = await $fetch(
+  "https://strapi.lymos.ru/api/dev-cases?sort=id&populate=*",
+  {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+  }
+);
 
 dataCase.getDevCase(response);
 </script>
@@ -22,7 +25,14 @@ dataCase.getDevCase(response);
     <div class="left_case">
       <div class="left_case_header">
         <h4>{{ devCase.attributes.h4 }}</h4>
-        <p>{{ devCase.attributes.li }}</p>
+        <ul>
+          <li v-for="devCaseli in devCase.attributes.dev_case_lis.data">
+            <p>
+              {{ devCaseli.attributes.li }}
+            </p>
+          </li>
+        </ul>
+
         <h6>{{ devCase.attributes.h6 }}</h6>
         <p class="case_description">{{ devCase.attributes.p }}</p>
       </div>
