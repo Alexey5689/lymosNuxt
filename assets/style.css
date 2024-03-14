@@ -5791,6 +5791,10 @@ main {
     display: none;
   }
 
+  .footer__email {
+    display: block;
+  }
+
   .footer_tel_rights {
     padding: 60px 24px 40px 24px;
   }
