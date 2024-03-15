@@ -2821,9 +2821,9 @@ main {
   width: 40.15625vw;
 }
 
-.modification .product_h4 {
+/* .modification .product_h4 {
   top: 2.8645833vw;
-}
+} */
 
 .p_description {
   color: #595959;
@@ -5210,9 +5210,9 @@ main {
     width: 100%;
   }
 
-  .modification .product_h4 {
+  /* .modification .product_h4 {
     top: 0;
-  }
+  } */
 
   .mvp .six_steps {
     padding-bottom: 80px;
