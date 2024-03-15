@@ -3,182 +3,31 @@ import { defineStore } from "pinia";
 export const DataExpertise = defineStore("data-expertise", {
   state: () => ({
     cart1: {
-      id: 1,
-      header: "Стратегия",
-      body: [
-        {
-          id: 1,
-          header: "DSS (Decision Support System)",
-          body: "Математические модели и статистические методы",
-        },
-        {
-          id: 2,
-          header: "EIS (Executive Information System)",
-          body: "Мониторинг ключевых показателей",
-        },
-        {
-          id: 3,
-          header: "FIM (Financial Information Management)",
-          body: "Бюджетирование и финансовый учет",
-        },
-        {
-          id: 4,
-          header: "CRM (Customer Relationship Management)",
-          body: "Маркетинг и продажи",
-        },
-      ],
-      switchers: [
-        {
-          id: 1,
-          body: "DSS",
-        },
-        {
-          id: 2,
-          body: "EIS",
-        },
-        {
-          id: 3,
-          body: "FIM",
-        },
-        {
-          id: 4,
-          body: "CRM",
-        },
-      ],
+      id: 0,
+      header: "",
+      body: [],
+      switchers: [],
     },
     pageCart1: 0,
     cart2: {
-      id: 2,
-      header: "Производство",
-      body: [
-        {
-          id: 1,
-          header: "SCM (Supply Chain Management)",
-          body: "Поставки и логистика",
-        },
-        {
-          id: 2,
-          header: "WMS (Warehouse Management System)",
-          body: "Управление складом",
-        },
-        {
-          id: 3,
-          header: "ERP (Enterprise Resource Planning)",
-          body: "Планирование ресурсов предприятия",
-        },
-        {
-          id: 4,
-          header: "MES (Manufacturing Execution System)",
-          body: "Контроль производственных операций на предприятии",
-        },
-      ],
-      switchers: [
-        {
-          id: 1,
-          body: "SCM",
-        },
-        {
-          id: 2,
-          body: "WMS",
-        },
-        {
-          id: 3,
-          body: "ERP",
-        },
-        {
-          id: 4,
-          body: "MES",
-        },
-      ],
+      id: 0,
+      header: "",
+      body: [],
+      switchers: [],
     },
     pageCart2: 0,
     cart3: {
-      id: 3,
-      header: "Персонал",
-      body: [
-        {
-          id: 1,
-          header: "HRM (Human Resource Management)",
-          body: "Управление персоналом",
-        },
-        {
-          id: 2,
-          header: "LMS (Learning Management System)",
-          body: "Управление обучением",
-        },
-        {
-          id: 3,
-          header: "PM (Project Management System)",
-          body: "Проектная деятельность",
-        },
-        {
-          id: 4,
-          header: "BPM (Business Process Management)",
-          body: "Управление бизнес-процессами",
-        },
-        {
-          id: 5,
-          header: "OAS (Office Automation System)",
-          body: "Автоматизация офиса",
-        },
-      ],
-      switchers: [
-        {
-          id: 1,
-          body: "HRM",
-        },
-        {
-          id: 2,
-          body: "LMS",
-        },
-        {
-          id: 3,
-          body: "PM",
-        },
-        {
-          id: 4,
-          body: "BPM",
-        },
-        {
-          id: 5,
-          body: "OAS",
-        },
-      ],
+      id: 0,
+      header: "",
+      body: [],
+      switchers: [],
     },
     pageCart3: 0,
     cart4: {
-      id: 4,
-      header: "Информация",
-      body: [
-        {
-          id: 1,
-          header: "ECM (Enterprise Content Management)",
-          body: "Прием и обработка документов",
-        },
-        {
-          id: 2,
-          header: "EDI (Electronic Data Interchange)",
-          body: "Обмен данными ЭДО",
-        },
-        {
-          id: 3,
-          header: "3",
-        },
-        {
-          id: 4,
-          header: "4",
-        },
-      ],
-      switchers: [
-        {
-          id: 1,
-          body: "ECM",
-        },
-        {
-          id: 2,
-          body: "EDI",
-        },
-      ],
+      id: 0,
+      header: "",
+      body: [],
+      switchers: [],
     },
     pageCart4: 0,
   }),
@@ -197,6 +46,27 @@ export const DataExpertise = defineStore("data-expertise", {
     },
   },
   actions: {
+    cart(responseCart1, responseCart2, responseCart3, responseCart4) {
+      this.cart1.header = responseCart1.data.attributes.header;
+      this.cart1.id = responseCart1.data.attributes.number;
+      this.cart1.body = responseCart1.data.attributes.cart_bodies.data;
+      this.cart1.switchers = responseCart1.data.attributes.cart_switchers.data;
+
+      this.cart2.header = responseCart2.data.attributes.header;
+      this.cart2.id = responseCart2.data.attributes.number;
+      this.cart2.body = responseCart2.data.attributes.cart_bodies.data;
+      this.cart2.switchers = responseCart2.data.attributes.cart_switchers.data;
+
+      this.cart3.header = responseCart3.data.attributes.header;
+      this.cart3.id = responseCart3.data.attributes.number;
+      this.cart3.body = responseCart3.data.attributes.cart_bodies.data;
+      this.cart3.switchers = responseCart3.data.attributes.cart_switchers.data;
+
+      this.cart4.header = responseCart4.data.attributes.header;
+      this.cart4.id = responseCart4.data.attributes.number;
+      this.cart4.body = responseCart4.data.attributes.cart_bodies.data;
+      this.cart4.switchers = responseCart4.data.attributes.cart_switchers.data;
+    },
     changeCart1(i) {
       this.pageCart1 = i;
     },

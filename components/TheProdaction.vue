@@ -4,8 +4,8 @@
       <h5>{{ expertise.cart2.header }}</h5>
       <div class="type_expertise_description">
         <div class="description_1">
-          <h6>{{ expertise.getCart2.header }}</h6>
-          <p>{{ expertise.getCart2.body }}</p>
+          <h6>{{ expertise.getCart2.attributes.header }}</h6>
+          <p>{{ expertise.getCart2.attributes.body }}</p>
         </div>
       </div>
     </div>
@@ -15,9 +15,9 @@
           v-for="(switcher, index) in expertise.cart2.switchers"
           :key="switcher.id"
           @mouseenter="expertise.changeCart2(index)"
-          :class="{ expertise_active: switcher.id === expertise.pageCart2 + 1 }"
+          :class="{ expertise_active: index === expertise.pageCart2 }"
         >
-          <p>{{ switcher.body }}</p>
+          <p>{{ switcher.attributes.body }}</p>
         </li>
       </ul>
       <ul v-else>
@@ -25,9 +25,9 @@
           v-for="(switcher, index) in expertise.cart2.switchers"
           :key="switcher.id"
           @click="expertise.changeCart2(index)"
-          :class="{ expertise_active: switcher.id === expertise.pageCart2 + 1 }"
+          :class="{ expertise_active: index === expertise.pageCart2 }"
         >
-          <p>{{ switcher.body }}</p>
+          <p>{{ switcher.attributes.body }}</p>
         </li>
       </ul>
     </div>
