@@ -7,4 +7,11 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ["stores"],
   },
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/favicon.svg' }, 
+      ]
+    }
+  }
 });
